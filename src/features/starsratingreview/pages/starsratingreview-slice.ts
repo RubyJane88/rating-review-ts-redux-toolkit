@@ -6,6 +6,7 @@ import {
 
 export const initialState: StarsRatingReviewType = {
   rate: 0,
+  stars: ["⭐"],
 };
 
 export const starsRatingReviewSlice = createSlice({
@@ -18,14 +19,15 @@ export const starsRatingReviewSlice = createSlice({
         return;
       }
       state.rate = state.rate + 1;
+      state.stars = [...state.stars, "⭐"];
     },
 
     removeRatingStarReviewAction: (state) => {
       if (state.rate === 0) {
-        // 0 i
         return;
       }
       state.rate = state.rate - 1;
+      state.stars = state.stars.slice(0, -1);
     },
   },
 });

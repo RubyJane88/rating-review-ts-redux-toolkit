@@ -14,6 +14,7 @@ import {
 
 const App: FC = () => {
   const { rate } = useSelector((state: RootState) => state.starsRatingReview);
+  const { stars } = useSelector((state: RootState) => state.starsRatingReview);
   const dispatch = useDispatch();
 
   useEffect(() => {}, []);
@@ -39,9 +40,7 @@ const App: FC = () => {
 
             <CardContent>{rate}</CardContent>
 
-            <CardContent>
-              <h3> STARS HERE </h3>
-            </CardContent>
+            <CardContent>{stars}</CardContent>
 
             <CardContent style={{ display: "flex", flexDirection: "column" }}>
               <div>
