@@ -1,26 +1,72 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, FC } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { Button, CardContent, Container } from "@material-ui/core";
+import AddCircleSharpIcon from "@material-ui/icons/AddCircleSharp";
+import RemoveSharpIcon from "@material-ui/icons/RemoveSharp";
+import "./App.css";
+import { RootState } from "./store/reducers";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import {
+  addRatingStarReviewAction,
+  removeRatingStarReviewAction,
+} from "./features/starsratingreview/pages/starsratingreview-slice";
 
-function App() {
+const App: FC = () => {
+  const { rate } = useSelector((state: RootState) => state.starsRatingReview);
+  const dispatch = useDispatch();
+
+  useEffect(() => {}, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <CssBaseline>
+      <BrowserRouter>
+        <Container>
+          <div
+            className="App"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100vh",
+              width: "100%",
+            }}
+          >
+            <CardContent>
+              <div>
+                <h1>Stars Rating Review</h1>
+              </div>
+            </CardContent>
 
+            <CardContent>{rate}</CardContent>
+
+            <CardContent>
+              <h3> STARS HERE </h3>
+            </CardContent>
+
+            <CardContent style={{ display: "flex", flexDirection: "column" }}>
+              <div>
+                <Button
+                  variant={"contained"}
+                  style={{ backgroundColor: "orange", marginBottom: "10px" }}
+                  onClick={() => dispatch(addRatingStarReviewAction())}
+                >
+                  <AddCircleSharpIcon />
+                </Button>
+              </div>
+              <div>
+                <Button
+                  variant={"contained"}
+                  style={{ backgroundColor: "green" }}
+                  onClick={() => dispatch(removeRatingStarReviewAction())}
+                >
+                  <RemoveSharpIcon />
+                </Button>
+              </div>
+            </CardContent>
+          </div>
+        </Container>
+      </BrowserRouter>
+    </CssBaseline>
+  );
+};
 export default App;
